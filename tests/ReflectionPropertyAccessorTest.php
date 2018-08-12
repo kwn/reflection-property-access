@@ -16,10 +16,7 @@ class ReflectionPropertyAccessorTest extends TestCase
         $this->reflectionPropertyAccessor = new ReflectionPropertyAccessor();
     }
 
-    /**
-     * @test
-     */
-    public function setValue(): void
+    public function testSetValue(): void
     {
         $object = new class {
             /** @var string */
@@ -36,10 +33,7 @@ class ReflectionPropertyAccessorTest extends TestCase
         self::assertEquals('bar', $object->getFoo());
     }
 
-    /**
-     * @test
-     */
-    public function getValue(): void
+    public function testGetValue(): void
     {
         $object = new class {
             /** @var string */
@@ -47,5 +41,45 @@ class ReflectionPropertyAccessorTest extends TestCase
         };
 
         self::assertEquals('bar', $this->reflectionPropertyAccessor->getValue($object, 'foo'));
+    }
+
+    public function testIsWritable(): void
+    {
+        $object = new class {
+            /** @var string */
+            private $foo;
+        };
+
+        self::assertTrue($this->reflectionPropertyAccessor->isWritable($object, 'foo'));
+    }
+
+    public function testIsNotWritable(): void
+    {
+        $object = new class {
+            /** @var string */
+            private $foo;
+        };
+
+        self::assertFalse($this->reflectionPropertyAccessor->isWritable($object, 'fizbiz'));
+    }
+
+    public function testIsReadable(): void
+    {
+        $object = new class {
+            /** @var string */
+            private $foo;
+        };
+
+        self::assertTrue($this->reflectionPropertyAccessor->isReadable($object, 'foo'));
+    }
+
+    public function testIsNotReadable(): void
+    {
+        $object = new class {
+            /** @var string */
+            private $foo;
+        };
+
+        self::assertFalse($this->reflectionPropertyAccessor->isReadable($object, 'fizbiz'));
     }
 }
