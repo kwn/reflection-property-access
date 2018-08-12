@@ -1,0 +1,28 @@
+{
+    "name": "kwn/reflection-property-access",
+    "description": "Reflection based implementation of Symfony Property Access component",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Kwn\\ReflectionPropertyAccess\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Kwn\\ReflectionPropertyAccess\\": "tests"
+        }
+    },
+    "require": {
+        "symfony/property-access": "^4.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.3"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Karol Wnuk",
+            "email": "k.wnuk@ascetic.pl"
+        }
+    ]
+}
